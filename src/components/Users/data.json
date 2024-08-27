@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "name": "Leanne Graham",
+    "email": "Qp2b5@example.com",
+    "style": {
+      "borderBottom": "1px solid red"
+    },
+    "histories": [
+      {
+        "id": 1,
+        "name": "Item 1",
+        "status": true
+      },
+      {
+        "id": 2,
+        "name": "Item 2",
+        "status": false
+      },
+      {
+        "id": 3,
+        "name": "Item 3",
+        "status": true
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Ervin Howell",
+    "email": "DjzQq@example.com",
+    "style": {
+      "background": "yellow",
+      "borderBottom": "1px solid green"
+    },
+    "histories": [
+      {
+        "id": 3,
+        "name": "Item 3",
+        "status": true
+      },
+      {
+        "id": 4,
+        "name": "Item 4",
+        "status": false
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Clementine Bauch",
+    "email": "qY7kz@example.com",
+    "style": {
+      "color": "red"
+    },
+    "histories": []
+  }
+]
