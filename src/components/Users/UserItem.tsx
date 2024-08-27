@@ -1,6 +1,6 @@
 import React from "react"
 
-type UserProps = {
+export type UserProps = {
   user: {
     id: number | string,
     name: string,
