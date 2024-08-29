@@ -1,29 +1,44 @@
-import { useEffect, useState } from "react";
-
+import { useReducer } from "react";
+type State = {
+  count: number;
+};
+type Action = {
+  type: "counter/increment" | "counter/decrement";
+  payload?: unknown;
+};
 export default function App() {
-  const [todos, setTodos] = useState<{ id: number; title: string }[]>([]);
-  useEffect((): void => {
-    // const timer: ReturnType<typeof setTimeout> = setTimeout(() => {
-    //   console.log(`Running after 2 seconds`);
-    // }, 2000);
-    // return () => {
-    //   clearTimeout(timer);
-    // };
-    const getTodos = async (): Promise<void> => {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/todos"
-      );
-      const data = await response.json();
-      setTodos(data);
-    };
-    getTodos();
-  }, []);
+  const reducer = (state: State, action: Action): State => {
+    switch (action.type) {
+      case "counter/increment": {
+        return { ...state, count: state.count + 1 };
+      }
+      case "counter/decrement": {
+        return { ...state, count: state.count + 1 };
+      }
+      default: {
+        return state;
+      }
+    }
+  };
+  const initialState: State = {
+    count: 0,
+  };
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const handleIncrement = (): void => {
+    dispatch({
+      type: "counter/increment",
+    });
+  };
+  const handleDecrement = (): void => {
+    dispatch({
+      type: "counter/decrement",
+    });
+  };
   return (
     <div>
-      <h2>Todo App</h2>
-      {todos.map((todo: { id: number; title: string }) => (
-        <h2 key={todo.id}>{todo.title}</h2>
-      ))}
+      <h1>Count: {state.count}</h1>
+      <button onClick={handleDecrement}>-</button>
+      <button onClick={handleIncrement}>+</button>
     </div>
   );
 }
