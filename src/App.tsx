@@ -1,64 +1,29 @@
-// import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import React, { useState } from "react";
-
-// const App = () => {
-//   const [count, setCount] = useState<number>(0);
-//   const handleIncrement = (): void => {
-//     setCount(count + 1);
-//   };
-//   const handleDecrement = (): void => {
-//     setCount(count - 1);
-//   };
-//   return (
-//     <div>
-//       <h1>Count: {count}</h1>
-//       <button onClick={handleDecrement}>-</button>
-//       <button onClick={handleIncrement}>+</button>
-//     </div>
-//   );
-// };
-
-// export default App;
-type User = {
-  name: string;
-  email: string;
-};
-function App() {
-  //   const [form, setForm] = useState<User | null | undefined>();
-  const [form, setForm] = useState<User | null>({} as User);
-  const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value } as User);
-    // setForm({ ...form, [e.target.name]: e.target.value });
-    // setForm(null);
-  };
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(form);
-  };
+export default function App() {
+  const [todos, setTodos] = useState<{ id: number; title: string }[]>([]);
+  useEffect((): void => {
+    // const timer: ReturnType<typeof setTimeout> = setTimeout(() => {
+    //   console.log(`Running after 2 seconds`);
+    // }, 2000);
+    // return () => {
+    //   clearTimeout(timer);
+    // };
+    const getTodos = async (): Promise<void> => {
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/todos"
+      );
+      const data = await response.json();
+      setTodos(data);
+    };
+    getTodos();
+  }, []);
   return (
     <div>
-      <form action="" onSubmit={handleSubmit}>
-        <div>
-          <input
-            type="text"
-            name="name"
-            placeholder="Name..."
-            onChange={handleChangeValue}
-          />
-        </div>
-        <div>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email..."
-            onChange={handleChangeValue}
-          />
-        </div>
-        <button>Submit</button>
-      </form>
+      <h2>Todo App</h2>
+      {todos.map((todo: { id: number; title: string }) => (
+        <h2 key={todo.id}>{todo.title}</h2>
+      ))}
     </div>
   );
 }
-
-export default App;
