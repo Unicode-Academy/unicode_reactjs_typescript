@@ -1,44 +1,22 @@
-import { useReducer } from "react";
-type State = {
-  count: number;
-};
-type Action = {
-  type: "counter/increment" | "counter/decrement";
-  payload?: unknown;
-};
+import React, { useCallback } from "react";
+
 export default function App() {
-  const reducer = (state: State, action: Action): State => {
-    switch (action.type) {
-      case "counter/increment": {
-        return { ...state, count: state.count + 1 };
-      }
-      case "counter/decrement": {
-        return { ...state, count: state.count + 1 };
-      }
-      default: {
-        return state;
-      }
-    }
-  };
-  const initialState: State = {
-    count: 0,
-  };
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const handleIncrement = (): void => {
-    dispatch({
-      type: "counter/increment",
-    });
-  };
-  const handleDecrement = (): void => {
-    dispatch({
-      type: "counter/decrement",
-    });
-  };
+  const handleClick: React.MouseEventHandler<HTMLParagraphElement> =
+    useCallback((e: React.MouseEvent<HTMLParagraphElement>) => {
+      // console.log("clicked", text);
+      console.log(e);
+    }, []);
   return (
     <div>
-      <h1>Count: {state.count}</h1>
-      <button onClick={handleDecrement}>-</button>
-      <button onClick={handleIncrement}>+</button>
+      <h1>Count: 0</h1>
+      {/* <button onClick={() => handleClick("Hoàng An")}>Click me</button> */}
+      {/* <button onClick={handleClick}>Click me</button> */}
+      <p onClick={handleClick}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci
+        suscipit, impedit reiciendis id voluptas, recusandae necessitatibus
+        inventore, nam dignissimos sunt ea repellendus deserunt omnis enim
+        aliquam maxime itaque natus facilis.
+      </p>
     </div>
   );
 }
