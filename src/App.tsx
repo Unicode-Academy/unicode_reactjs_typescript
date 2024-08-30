@@ -1,21 +1,15 @@
-import { useEffect, useRef } from "react";
-import Input from "./components/Input";
-
+import React, { createContext, useState } from "react";
+import Products from "./components/Products";
+type AppContextType = {
+  title: string;
+  setTitle: React.Dispatch<React.SetStateAction<string>>;
+};
+export const AppContext = createContext<AppContextType>({} as AppContextType);
 export default function App() {
-  const inputRef = useRef<HTMLInputElement>(null);
-  useEffect(() => {
-    console.log(inputRef);
-  });
-  const handleClick: React.MouseEventHandler = () => {
-    inputRef.current?.focus();
-  };
+  const [title, setTitle] = useState<string>("Demo Context");
   return (
-    <div>
-      <Input ref={inputRef} value={"Hoàng An"} />
-      <button onClick={handleClick}>Focus</button>
-    </div>
+    <AppContext.Provider value={{ title, setTitle }}>
+      <Products />
+    </AppContext.Provider>
   );
 }
-
-//forwardRef
-//useImperativeHandle
