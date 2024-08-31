@@ -1,15 +1,14 @@
-import React, { createContext, useState } from "react";
-import Products from "./components/Products";
-type AppContextType = {
-  title: string;
-  setTitle: React.Dispatch<React.SetStateAction<string>>;
-};
-export const AppContext = createContext<AppContextType>({} as AppContextType);
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "./redux/slice/userSlice";
+import { RootState, store } from "./redux/store";
 export default function App() {
-  const [title, setTitle] = useState<string>("Demo Context");
-  return (
-    <AppContext.Provider value={{ title, setTitle }}>
-      <Products />
-    </AppContext.Provider>
-  );
+  const dispatch = useDispatch<typeof store.dispatch>();
+  const user = useSelector((state: RootState) => state.users.user);
+  console.log(user);
+
+  useEffect(() => {
+    dispatch(getUser(1));
+  }, []);
+  return <div>App</div>;
 }
